@@ -2,3 +2,109 @@
 @model Anamaka.Pages.ReadFile.IndexModel
 @{
 }
+<div class="container">
+    <div class="row">
+        <form id=",ploadFrom" method="post" enctype="multipart/form-data" class="col-12">
+            <input type="file" asp-for="Upload1" />
+            <input type="file" asp-for="Upload2" />
+            <button class="btn btn-outline-info" onclick="$(" UploadFrom").submit()">
+                <i class="fas fa-upload fa-lg"></i>
+                <a>Upload</a>
+            </button>
+        </form>
+    </div>
+</div>
+<div>
+    <div style="border:black 2px solid; padding:5px; margin:10px;">
+        <table id="table_id1" class="display">
+            @if (Model.ResultsTasviye != null)
+            {
+                <thead>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().TotalAmount"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().RRN"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().CustomerId"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().Date"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().Time"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().Datefa"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviye.FirstOrDefault().PsbId"></label>
+                </td>
+                </thead>
+                @foreach (var item in Model.ResultsTasviye)
+                {
+                    <tr>
+                        <td>@item.TotalAmount.ToString()</td>
+                        <td>@item.RRN.ToString()</td>
+                        <td class="table-success">@item.CustomerId.ToString()</td>
+                        <td>@item.Date.ToString()</td>
+                        <td>@item.Time.ToString()</td>
+                        <td>@item.Datefa.ToString()</td>
+                        <td>@item.PsbId.ToString()</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <p>Not Found</p>
+            }
+        </table>
+    </div>
+    <div style="border:black 2px solid; padding:5px; margin:10px;">
+        <table id="table_id2" class="display">
+            @if (Model.ResultsTasviyeKhorgin != null)
+            {
+                <thead>
+                <td>
+                    <label asp-for="ResultsTasviyeKhorgin.FirstOrDefault().Date"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviyeKhorgin.FirstOrDefault().Time"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviyeKhorgin.FirstOrDefault().Toman"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviyeKhorgin.FirstOrDefault().TerminalName"></label>
+                </td>
+                <td>
+                    <label asp-for="ResultsTasviyeKhorgin.FirstOrDefault().CustomerId"></label>
+                </td>
+                </thead>
+                @foreach (var item in Model.ResultsTasviyeKhorgin)
+                {
+                    <tr>
+                        <td>@item.Date.ToString()</td>
+                        <td>@item.Time.ToString()</td>
+                        <td>@item.Toman.ToString()</td>
+                        <td>@item.TerminalName.ToString()</td>
+                        <td>@item.CustomerId.ToString()</td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <p>Not Found</p>
+            }
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script>
+            $(document).ready(function () {
+                $('#table_id1').DataTable();
+                $('#table_id2').DataTable();
+            });</script>
+}
